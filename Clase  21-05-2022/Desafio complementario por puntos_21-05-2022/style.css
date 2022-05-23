@@ -1,0 +1,30 @@
+
+ #titulos h1 {
+    background-color: #9f9e9f ;
+}
+#titulos h2 {
+    background-color: #9f9e9f ;
+}
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: black;
+}
+
+h2 {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: black;
+}
+
+table{
+    background-color: #9f9e9f ;
+}
+
+p {
+    font-weight: bold;
+    color: orange;
+    background-color: black;
+    padding: 20px;
+}
+
