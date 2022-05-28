@@ -1,0 +1,50 @@
+* {
+    background-color: whitesmoke;
+}
+
+body {
+    padding-left: 5rem;
+    padding-right: 5rem;
+    align-content: center;
+    font-family: 'Arial', Helvetica, sans-serif;
+}
+
+h1 {
+    font-size: 3rem;
+} 
+
+p {
+    font-size: larger;
+    word-spacing: 0.1em;
+    padding: 2%;
+}
+
+strong {
+    font-weight: 900;
+    color: blue;
+}
+
+span {
+    font-weight: 900;
+    color:indigo;
+}
+
+div#display {
+    background-color: black;
+    color: lightblue;
+    font-family: monospace;
+    font-size: xx-large;
+    text-align: right;
+    padding: 1rem;
+    padding-right: 1rem;
+}
+
+table {
+    font-size: larger;
+}
+
+th, td {
+    text-align: center;
+    color:brown !important;
+    font-weight: bolder;
+}
