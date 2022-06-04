@@ -8,56 +8,35 @@ plazo --> 30 dias (Valores fijos en switch )
 ALGUNOS METODOS
 formula para obtener el interes ganado  --> (((100000 * 47) / 100) / 12)  
 formula para obtener el interes ganado + capital invertido   --> (((100000 * 47) / 100) / 12) + 100000
+
+
+
 */
 
 
 //FUNCION CONSTRUCTORA
-function PlazoFijo(capital, tna, plazo, iva) {
+function PlazoFijo(capital, tna, plazo) {
     this.capital = capital
     this.tna = tna
     this.plazo = plazo
-    this.iva = iva
 
-    this.interesMensual = function () {
-        return (((this.capital * tna) / 100)) / 12;
+    this.interesGanadoMensual = function () {
+        return  ((((this.capital *  this.tna) / 100)) / ANIO).toFixed(2);
     }
 
-    this.interesMensualPorCantMeses = function(dias) {
- 
-
-        this.stock = this.stock - unidades
+    this.interesMensualPorCantMeses = function() {
+        return (this.interesGanadoMensual() * this.plazo) ;
     }
-
-
-    this.conversorPlazo = function (opcion) {
-                
-       
-
-
-    }
-
-
-}
-
-
-
-
-//CLASE JS
-class Producto {
-    constructor(nombre, stock, precio, iva) {
-        this.nombre = nombre
-        this.stock = stock
-        this.precio = precio
-        this.iva = iva
-    }
-    precioFinal() {
-        return this.precio * this.iva
-    }
-
-    descuentoStock(unidades) {
-        this.stock = this.stock - unidades
+    
+    this.interesMensualPorCantMesesMasCapital = function() {
+       return ((this.interesMensualPorCantMeses() + this.capital)).toFixed(2);
     }
 }
+
+
+
+
+
 
 
 
