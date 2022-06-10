@@ -1,0 +1,72 @@
+lista de productos
+*tarjeta Credito visa--> 25%
+*tarjeta master --> 25%
+*prestamo --> 40%
+*caja de ahorro
+*cuenta corriente -->  10% de acuerdo
+*plazo fijo
+
+//calular monto disponible 
+(ingreso neto * 4)
+
+
+Clase 
+======
+
+tipoProducto
+marca
+montoDisponible
+
+se van listando los porductos seleccionados con un total al final
+================================================================
+prestamo
+tarjeta
+cuenta corriente
+
+
+otros productos
+=================
+caja de ahorro
+plazo fijo
+
+
+
+
+1) ingresar ingreso neto
+2) seleccionar porductos
+	se van listando al selccionar y se va restando del stock disponible por cuenta
+
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

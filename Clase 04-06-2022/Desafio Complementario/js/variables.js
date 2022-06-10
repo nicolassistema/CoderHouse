@@ -6,16 +6,13 @@ const CC = 10;
 
 
 
-const listaProductosDisponibles = [];
-listaProductosDisponibles.push("Prestamo");
-listaProductosDisponibles.push("Tarjeta Visa");
-listaProductosDisponibles.push("Tarjeta Master");
-listaProductosDisponibles.push("Caja de Ahorro");
-listaProductosDisponibles.push("Cuenta Corriente");
 
-/*
-const listaProductos = [];
-listaProductos.push(new Producto("Prestamo","S/M",PRESTAMO))
-listaProductos.push(new Producto("Tarjeta Visa","VISA",TARJETA))
-listaProductos.push(new Producto("Cuenta Corriente",CC))
-*/
+
+const listaProductosDisponibles = [];
+
+
+listaProductosDisponibles.push(new Producto ("Prestamo", 50));
+listaProductosDisponibles.push(new Producto ("Tarjeta Visa",25));
+listaProductosDisponibles.push(new Producto ("Tarjeta Master",25));
+listaProductosDisponibles.push(new Producto ("Caja de Ahorro",0));
+listaProductosDisponibles.push(new Producto ("Cuenta Corriente",10));
