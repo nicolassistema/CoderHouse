@@ -4,12 +4,7 @@ const TARJETA = 25;
 const PRESTAMO = 40;
 const CC = 10;
 
-
-
-
-
 const listaProductosDisponibles = [];
-
 
 listaProductosDisponibles.push(new Producto ("Prestamo", 50));
 listaProductosDisponibles.push(new Producto ("Tarjeta Visa",25));

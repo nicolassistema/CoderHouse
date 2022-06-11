@@ -1,9 +1,7 @@
 const listaProductosNueva = [];
 ingresarDatos();
 
-
 function ingresarDatos() {
-
    let nombre = ingresarNombre()
    let apellido = ingresarApellido()
    let ingresoNeto = ingresarIngresoNeto();
@@ -12,7 +10,7 @@ function ingresarDatos() {
    let montoDisponibleMasterTarje;
    let montoDisponibleCC;
    let mensaje = "";
-  
+     
   do {
       
   } while (seleccionarProducto());
@@ -48,8 +46,7 @@ function ingresarDatos() {
 
 
 function restarProductos(opcion) {
-       opcion = opcion-1
-
+    opcion = opcion-1
     for (let i = 0; i < listaProductosDisponibles.length; i++) {
        if(opcion == i ){
         listaProductosDisponibles.splice(opcion , 1);
@@ -59,8 +56,6 @@ function restarProductos(opcion) {
     }
     return "n";
 }
-
-
 
 function ingresarNombre() {
     let nombre  =  prompt("Ingresar Nombre")
@@ -87,7 +82,6 @@ function ingresarIngresoNeto() {
     return numero;  
 }
 
-
 function seleccionarProducto() {
     let opcion;
     let mensaje;
@@ -104,8 +98,6 @@ function seleccionarProducto() {
             return false;
         }else{
             opcion =  restarProductos(parseInt(opcion))
-       
-
             while (!validarNumeroPositivo(opcion +1 )) {
                 opcion = prompt("La opcion no es incorrecto. Por favor ingresar los alguna de las siguientes opciones en numero: " + mensaje)
 

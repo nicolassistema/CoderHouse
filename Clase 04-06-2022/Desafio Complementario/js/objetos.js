@@ -23,16 +23,6 @@ formula para obtener el interes ganado + capital invertido   --> (((100000 * 47)
 
 */
 
-
-//Clases
-/*class Persona {
-    constructor(nombre, apellido,  ingresoNeto) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.ingresoNeto = ingresoNeto;
-    }
-}*/
-
 class Producto {
     constructor(nombre,numeroCalculo){
         this.nombre = nombre;
@@ -40,17 +30,6 @@ class Producto {
     }
 }
 
-
-
-/*
-class Paquete {
-    constructor(persona,listaProductos) {
-        this.persona = persona;
-        this.listaProductos = listaProductos;
-    }
-}
-
-*/
 
 
 
