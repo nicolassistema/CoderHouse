@@ -51,8 +51,7 @@ function restarProductos(opcion) {
        if(opcion == i ){
         listaProductosDisponibles.splice(opcion , 1);
             return i;
-            break;
-       }
+          }
     }
     return "n";
 }
@@ -64,6 +63,7 @@ function ingresarNombre() {
     }
     return nombre;
 }
+
 
 function ingresarApellido() {
     let apellido  =  prompt("Ingresar apellido")
