@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;0,700;1,100;1,300;1,500;1,700&display=swap');
+
+div, form {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+form {
+    padding: 2em;
+}
+
+.color-formulario {
+    background-color: whitesmoke;
+}
+
+h1, h2 {
+    font-size: xx-large;
+}
+
+p, li {
+    font-size: 1.2em;
+}
+
+.collection-item {
+    line-height: 2em !important;
+}
+
+.color-carrito {
+    background-color: aliceblue;
+}
+
+.carrito {
+    border-color: whitesmoke;
+    padding: 5px;
+}
+
+.italica-carrito {
+    font-style: italic;
+}
+
+.fondo-inputs {
+    background-color: aquamarine !important;
+}

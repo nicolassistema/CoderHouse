@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+
+/* * {
+    background-color: whitesmoke;
+} */
+
+body {
+    background-color: whitesmoke;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.parent {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.delete {
+    background-color: darkred !important;
+    color: white !important;
+}

@@ -18,18 +18,33 @@ formula para obtener el interes ganado + capital invertido   --> (((100000 * 47)
 
     al seleccionar un porducto restando de la lista original y agregando a una lista nueva
 
-    
+    agregar array de busqueda y filtrado
+
+
+
+    1) ingrese barrio en el que vive
+
+
+    lista de sucursales
+     ojeto sucursal
+             nombreSucursal
+             barrioSucursal
 
 
 */
 
 class Producto {
-    constructor(nombre,numeroCalculo){
+    constructor(nombre, numeroCalculo) {
         this.nombre = nombre;
         this.numeroCalculo = numeroCalculo;
     }
 }
 
-
+class Sucursales {
+    constructor(nombreSucursal, nombreBarrio) {
+        this.nombreSucursal = nombreSucursal
+        this.nombreBarrio = nombreBarrio;
+    }
+}
 
 
