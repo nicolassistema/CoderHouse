@@ -1,129 +1,133 @@
-
 const listaProductosNueva = [];
 ingresarDatos();
 
 function ingresarDatos() {
-   
-  // let nombre = ingresarNombre()
-  // let apellido = ingresarApellido()
-  // let ingresoNeto = ingresarIngresoNeto();
+    let nombre = ingresarNombre()
+    let apellido = ingresarApellido()
+    let ingresoNeto = ingresarIngresoNeto();
+    let montoDisponiblePrestamo;
+    let montoDisponibleVisaTarje;
+    let montoDisponibleMasterTarje;
+    let montoDisponibleCC;
+    let mensaje = "";
 
-  //ingrese producto
+    do {
 
+    } while (seleccionarProducto());
 
-  do {
-      
-  } while (seleccionarProducto());
+    mensaje += "Nombre: " + nombre
+    mensaje += "\nApellido: " + apellido
+    mensaje += "\nIngreso Neto: " + ingresoNeto
 
-   
-   
-   /* let capitalEntrada;
-    let plazoEntrada;
-   
-    capitalEntrada = ingresarCapital();
-    plazoEntrada = ingresarPlazo()
-
-        if(capitalEntrada != null && plazoEntrada != null){
-            const plazo6 = new PlazoFijo(capitalEntrada,TNA,plazoEntrada);
-            alert("Capital igresado: $"+plazo6.capital+"\nAl final del plazo fijo, recibís \n" +"$"+plazo6.interesMensualPorCantMesesMasCapital() + "\n Interes Ganado \n" +"$"+ plazo6.interesMensualPorCantMeses()+"\nTNA %: "+TNA);
+    for (let i = 0; i < listaProductosNueva.length; i++) {
+        if (listaProductosNueva[i].nombre == "Prestamo") {
+            montoDisponiblePrestamo = ingresoNeto - ((ingresoNeto * listaProductosNueva[i].numeroCalculo) / 100)
+            mensaje += "\nMonto Disponible para prestamo: " + montoDisponiblePrestamo
         }
-
-        */
-}
-
-
-function ingresarCapital () {
-    let numero;
-    numero = parseFloat(prompt("Por favor ingrese el capital mayor a 0"));
-    console.log("s********** " + typeof(numero))
-    while (!validarNumeroPositivo(numero)) {
-        numero = parseFloat(prompt("Lo ingresado no es correcto. Por favor ingrese el capital mayor a 0 "))
+        if (listaProductosNueva[i].nombre == "Tarjeta Visa") {
+            montoDisponibleVisaTarje = ingresoNeto - ((ingresoNeto * listaProductosNueva[i].numeroCalculo) / 100)
+            mensaje += "\nMonto Disponible tarjeta Visa: " + montoDisponibleVisaTarje
+        }
+        if (listaProductosNueva[i].nombre == "Tarjeta Master") {
+            montoDisponibleMasterTarje = ingresoNeto - ((ingresoNeto * listaProductosNueva[i].numeroCalculo) / 100)
+            mensaje += "\nMonto Disponible tarjeta Master: " + montoDisponibleMasterTarje
+        }
+        if (listaProductosNueva[i].nombre == "Cuenta Corriente") {
+            montoDisponibleCC = ingresoNeto - ((ingresoNeto * listaProductosNueva[i].numeroCalculo) / 100)
+            mensaje += "\nMonto Disponible Cuenta Corriente: " + montoDisponibleCC
+        }
+        if (listaProductosNueva[i].nombre == "Caja de Ahorro") {
+            montoDisponibleCC = ingresoNeto - ((ingresoNeto * 10) / 100)
+            mensaje += "\nDisponible de una Caja de Ahorro Bonificada!!!!"
+        }
     }
-    return numero;
-}
-
-function ingresarPlazo () {
-    let numero;
-    numero = conversorPlazo(parseInt(prompt("Por favor ingresar alguno de los siguientes plazos disponibles en dias: \n 30 \n 60 \n 90 \n 120 \n 150 \n 180 \n 210 \n 240  \n 270 \n 300 \n 330 \n 360 ")))
-    while (!validarNumeroPositivo(numero)) {
-        numero = conversorPlazo(parseInt(prompt("Lo ingresado no es correcto. Por favor ingresar alguno de los siguientes plazos disponibles en dias: \n 30 \n 60 \n 90 \n 120 \n 150 \n 180 \n 210 \n 240  \n 270 \n 300 \n 330 \n 360 ")))
+    alert(mensaje);
+    if (confirm("Desea buscar sucursal cercana?")) {
+        let opcionBuscar = "";
+        do {
+            opcionBuscar = prompt(" Selecciones buscar por: \n (1) Buscar por barrio \n (2) Buscar por Sucursal \n")
+            switch (opcionBuscar) {
+                case "1":
+                    alert(buscarPorBarrio())
+                    break;
+                case "2":
+                    alert(buscarPorSucursal())
+                    break;
+                default:
+                    alert("Opcion invalida.")
+                    break;
+            }
+        } while (opcionBuscar != "1" && opcionBuscar != "2");
     }
-    return numero;
+    alert("Gracias vuelvas prontos!");
 }
 
 
-function conversorPlazo(opcion) {
-    switch (opcion) {
-        case 30:
-            return 1;
-            break;
-        case 60:
-            return 2;
-            break;
-        case 90:
-            return 3;
-            break;
-        case 120:
-            return 4;
-            break;
-        case 150:
-            return 5;
-            break;
-        case 180:
-            return 6;
-            break;
-        case 210:
-            return 7;
-            break;
-        case 240:
-            return 8;
-            break;
-        case 270:
-            return 9;
-            break;
-        case 300:
-            return 10;
-            break;
-        case 330:
-            return 11;
-            break;
-        case 360:
-            return 12;
-            break;
-        default:
-            return "n";
-            break;
+function buscarPorBarrio() {
+    //debugger
+    let mensaje = "";
+    let nombreBarrio = prompt("ingrese barrio")
+    const lista = listaSucursales.filter((el) => { ////retorna array filtrado //array vacio
+        return el.nombreBarrio == nombreBarrio
+    })
+    for (const barrio of lista) {
+        mensaje += barrio.nombreSucursal + " \n";
     }
+    if (mensaje == "") {
+        mensaje = "No hay sucursal para el barrio que eligio"
+    }
+    return mensaje;
 }
+
+
+function buscarPorSucursal() {
+    let nombreSucursal = prompt("Ingresar nombre sucursal")
+    let mensaje = "";
+    const lista = listaSucursales.find((el) => { ////retorna el elemento del array
+        return el.nombreSucursal == nombreSucursal
+    })
+
+    if (lista != undefined) {
+        mensaje = lista.nombreBarrio + " \n";
+    }
+
+
+    if (mensaje == "") {
+        mensaje = "No hay barrio para la sucursal que eligio"
+    }
+    return mensaje;
+}
+
 
 function restarProductos(opcion) {
-       opcion = opcion-1
-
+    opcion = opcion - 1
     for (let i = 0; i < listaProductosDisponibles.length; i++) {
-       if(opcion == i ){
-        listaProductosDisponibles.splice(opcion , 1);
+        if (opcion == i) {
+            listaProductosDisponibles.splice(opcion, 1);
             return i;
-            break;
-       }
+        }
     }
     return "n";
 }
 
+
 function ingresarNombre() {
-    let nombre  =  prompt("Ingresar Nombre")
+    let nombre = prompt("Ingresar Nombre")
     while (!validarNombre(nombre)) {
         nombre = prompt("Lo ingresado no es correcto. Por favor ingresar el nombre ")
     }
     return nombre;
 }
 
+
 function ingresarApellido() {
-    let apellido  =  prompt("Ingresar apellido")
+    let apellido = prompt("Ingresar apellido")
     while (!validarNombre(apellido)) {
         apellido = prompt("Lo ingresado no es correcto. Por favor ingresar el apellido ")
     }
     return apellido;
 }
+
 
 function ingresarIngresoNeto() {
     let numero;
@@ -131,56 +135,51 @@ function ingresarIngresoNeto() {
     while (!validarNumeroPositivo(numero)) {
         numero = parseInt(prompt("Lo ingresado no es correcto. Por favor ingresar ingreso neto "))
     }
-    return numero;  
+    return numero;
 }
-
 
 function seleccionarProducto() {
     let opcion;
-    let mensaje;
-   // debugger
+    let mensaje = "";
+    //debugger
     const listaAux = listaProductosDisponibles.slice()//copia la lista y la guarda en otra lista
     //Recorre la lista de prodcutos disponibles y va sumando al mensaje
-    if(listaProductosDisponibles.length > 0){
+    if (listaProductosDisponibles.length > 0) {
         for (let i = 0; i < listaProductosDisponibles.length; i++) {
-            mensaje += "\n ("+(i+1)+") " + listaProductosDisponibles[i];
+            mensaje += "\n (" + (i + 1) + ") " + listaProductosDisponibles[i].nombre;
         }
-         mensaje += "\n ::::Pulsar s para finalizar::::";
-        opcion = prompt("Por favor ingresar los alguna de las siguientes opciones en numero: " + mensaje)
-        if(opcion.toLocaleLowerCase() == "s"){
+        mensaje += "\n ::::Pulsar s para finalizar::::";
+        opcion = prompt("Por favor ingresar alguna de las siguientes opciones en numero: " + mensaje)
+        if (opcion.toLocaleLowerCase() == "s") {
             return false;
-        }else{
-            opcion =  restarProductos(parseInt(opcion))
-       
+        } else {
+            opcion = restarProductos(parseInt(opcion))
+            while (!validarNumeroPositivo(opcion + 1)) {
+                opcion = prompt("La opcion no es incorrecto. Por favor ingresar alguna de las siguientes opciones en numero: " + mensaje)
 
-            while (!validarNumeroPositivo(opcion +1 )) {
-                opcion = prompt("La opcion no es incorrecto. Por favor ingresar los alguna de las siguientes opciones en numero: " + mensaje)
-
-               if(opcion.toLocaleLowerCase() == "s"){
+                if (opcion.toLocaleLowerCase() == "s") {
                     return false;
-                }else{
-
-                    opcion =  restarProductos(parseInt(opcion))
+                } else {
+                    opcion = restarProductos(parseInt(opcion))
                 }
             }
-            agregarProducto(listaProductosNueva,listaAux[opcion])
+            agregarProducto(listaProductosNueva, listaAux[opcion])
             return true;
         }
-    }else{
+    } else {
         return false;
     }
 }
 
 
-function agregarProducto(listaProducto,producto) {
-    //ARREGLAR POR QUE CUANDO SE AGREGA NO ESA UNA NUEVA LISTA DE PRODUCTOS, SI NO HAY QUE AGREGAR AL OBJETO PRODUCTO
+function agregarProducto(listaProducto, producto) {
     listaProducto.push(producto);
 }
 
 
 function validarNumeroPositivo(numero) {
     let flag = false;
-    if(!isNaN(numero)){
+    if (!isNaN(numero)) {
         if (numero > 0) {
             flag = true;
         }
@@ -190,8 +189,8 @@ function validarNumeroPositivo(numero) {
 
 function validarNombre(nombre) {
     let flag = false;
-    if(isNaN(nombre)){
-            flag = true;
+    if (isNaN(nombre)) {
+        flag = true;
     }
     return flag;
 }

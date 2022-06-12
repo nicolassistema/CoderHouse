@@ -18,60 +18,33 @@ formula para obtener el interes ganado + capital invertido   --> (((100000 * 47)
 
     al seleccionar un porducto restando de la lista original y agregando a una lista nueva
 
-    
+    agregar array de busqueda y filtrado
 
-5) Desea un plazo fijo?
-    si --> cargar plazo fijo
-    
-    
+
+
+    1) ingrese barrio en el que vive
+
+
+    lista de sucursales
+     ojeto sucursal
+             nombreSucursal
+             barrioSucursal
 
 
 */
 
-
-//Clases
-class Persona {
-    constructor(nombre, apellido, capital, ingresoNeto) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.capital = capital;
-        this.ingresoNeto = ingresoNeto;
-       
-    }
-}
-
-class Paquete {
-    constructor(nombre, apellido, capital, ingresoNeto, plazo, listaProductos) {
-        this.persona = new Persona(nombre, apellido, capital, ingresoNeto)
-        this.plazoFijo = new PlazoFijo(capital, TNA, plazo)
-        this.listaProductos = listaProductos;
-    }
-}
-
 class Producto {
-    constructor(nombreProducto, marca, porcentaje) {
-        this.nombreProducto = nombreProducto;
-        this.marca = marca;
-        this.porcentaje = porcentaje;
+    constructor(nombre, numeroCalculo) {
+        this.nombre = nombre;
+        this.numeroCalculo = numeroCalculo;
     }
 }
 
-class PlazoFijo {
-    constructor(capital, tna, plazo) {
-        this.capital = capital;
-        this.tna = tna;
-        this.plazo = plazo;
-
-       this.interesGanadoMensual = function() {
-            return ((((this.capital * this.tna) / 100)) / ANIO).toFixed(2);
-        };
-
-        this.interesMensualPorCantMeses = function() {
-            return (this.interesGanadoMensual() * this.plazo);
-        };
-
-        this.interesMensualPorCantMesesMasCapital = function() {
-            return ((this.interesMensualPorCantMeses() + this.capital)).toFixed(2);
-        };
+class Sucursales {
+    constructor(nombreSucursal, nombreBarrio) {
+        this.nombreSucursal = nombreSucursal
+        this.nombreBarrio = nombreBarrio;
     }
 }
+
+
