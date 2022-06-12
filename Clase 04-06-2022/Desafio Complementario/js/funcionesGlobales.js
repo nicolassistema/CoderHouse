@@ -45,49 +45,11 @@ function ingresarDatos() {
 }
 
 
-const arrayFunciones = []
-
-
-arrayFunciones.push(ingresarDatos())
-
-
-arrayFunciones.ingresarDatos()
-arrayFunciones[0]
-
-
-
-
 function restarProductos(opcion) {
 
-/*
-let index = listaProductosDisponibles.findIndex((item) => {
-        return item.nombre == opcion;
-    }
-)
-*/
+   opcion = opcion-1
 
-
-    opcion = opcion-1
-
-let intBarrio = prompt("ingrese barrio")
-
-
-const ejemplo =  listaProductosDisponibles.filter((el) => { ////retorna array filtrado
-
-        return el.nombreBarrio == intBarrio
-    })
-
-
-let nombreSucursal = prompt("Ingresar nombre sucursal")
-
-const ejemplo2 =  listaProductosDisponibles.find((el) => { ////retorna el elemento del array
-
-    return el.nombreSucursal == nombreSucursal
-})
-
-
-
-    for (let i = 0; i < listaProductosDisponibles.length; i++) {
+   for (let i = 0; i < listaProductosDisponibles.length; i++) {
        if(opcion == i ){
         listaProductosDisponibles.splice(opcion , 1);
             return i;
