@@ -19,14 +19,15 @@ cargarPorductos()
 
 function cargarPorductos() {
    // debugger
-    listadoFrutas.innerHTML ="";
+    listadoFrutas.innerHTML ="";//modificar el continedo del html
     for(elemento of productos){
         const listaProd = document.createElement("li")
-        listaProd .id = "2022" + elemento
+        listaProd.id = "2022" + elemento
         listaProd.className = "orange-text"
         listaProd.innerText = elemento
         listaProd.addEventListener("click", () => {
-          agregarAlCarrito(`${listaProd.id}`)
+          agregarAlCarrito(` los id ${listaProd.id}`)
+          agregarAlCarrito()
 
         })
         listadoFrutas.append(listaProd)
@@ -45,9 +46,7 @@ function agregarAlCarrito(prod) {
       liCarrito.innerText = elemento.innerText//document.querySelector(`#${prod}`).innerText
       liCarrito.id = `${prod}EnCarrito` 
 
-      liCarrito.ondb
-
-      listadoCarrito.append(liCarrito)
+     listadoCarrito.append(liCarrito)
 
   }
 }
