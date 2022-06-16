@@ -6,3 +6,8 @@ body {
     margin-right: 5%;
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
 }
+
+
+.table-hover {
+    background-color: aqua;
+}

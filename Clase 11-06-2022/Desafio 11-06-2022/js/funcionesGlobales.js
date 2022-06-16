@@ -1,78 +1,147 @@
+//init
 const listaEmpleados = [];
 const listFila = [];
-
-
 const tabla = document.getElementById("tabla")
-let acum = 0
+
 
 function agregarFila() {
     //  debugger
+
+    let fila = document.createElement("tr")
+    fila.innerHTML = `<td class="td"> <input type="text" class="nombreEmpleado" placeholder="juan"> </td> 
+<td class="td"> <input type="text" class="apellidoEmpleado" placeholder="gomez"> </td> 
+<td class="td"> <input type="text" class="ingresoNeto" placeholder="100000"> </td> 
+<td class="td"> <input type="checkbox" class="chkMontoPrestamo"> <p class="outPutMontoPP"></p> </td> 
+<td class="td"> <input type="checkbox" class="cc" > <p class="outPutCC"></p></td> 
+<td class="td"> <input type="checkbox" class="ca" > <p class="outPutCA">s/ Caja de Ahorro</p></td> 
+<td class="td"> <input type="checkbox" class="tv" > <p class="outPutTV"></p></td> 
+<td class="td"> <input type="checkbox" class="tm" ><p class="outPutTM"></p> </td> 
+<td class="td"> <button role="button"  class="rmvButton" >X</button> </td>`
+
+    fila.getElementsByClassName("rmvButton")[0].addEventListener("click", () => {
+        // if(confirm("Queres volar a la verga esto?")){
+        fila.remove();
+        // }
+    })
+
+
+
+
+
+
+    fila.getElementsByClassName("ingresoNeto")[0].addEventListener("change", () => {
+        const ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
+        const prestamoIn = fila.getElementsByClassName("chkMontoPrestamo")[0]
+        const prestamoOut = fila.getElementsByClassName("outPutMontoPP")[0]
+     //   if (prestamoIn.checked) {
+            prestamoOut.innerText = "$ " + calculoPrestamo(ingresoNetoIn);
+     //   } else {
+      //      prestamoOut.innerText = "grisado $ " + calculoPrestamo(ingresoNetoIn);
+      //  }
+    })
+
+
+
+
    
-    let fila = ""
-    fila += `<tr class="tr" id="tr${acum}">`
-    fila += `<td class="td"> <input type="text" class="nombreEmpleado" placeholder="juan"> </td> `
-    fila += `<td class="td"> <input type="text" class="apellidoEmpleado" placeholder="gomez"> </td> `
-    fila += `<td class="td"> <input type="text" class="ingresoNeto" placeholder="100000"> </td> `
-    fila += `<td class="td"> <input type="checkbox" class="chkMontoPrestamo" onclick="checkMontoPP()"> <p class="outPutMontoPP"></p> </td> `
-    fila += `<td class="td"> <input type="checkbox" class="cc" > <p class="outPutCC"></p></td> `
-    fila += `<td class="td"> <input type="checkbox" class="ca" > <p class="outPutCA"></p></td> `
-    fila += `<td class="td"> <input type="checkbox" class="tv" > <p class="outPutTV"></p></td> `
-    fila += `<td class="td"> <input type="checkbox" class="tm" ><p class="outPutTM"></p> </td> `
-    fila += `<td class="td"> <button role="button" onclick='eliminarFila("tr${acum}")'  class="primary" >X</button> </td>` 
-    fila += "</tr> "
-    tabla.innerHTML += fila
-    listFila.push(fila)
-   // listaEmpleados.push(new Empleado("", "", 0, 0, 0, 0, 0, false))
-    acum++
+
+
+    fila.getElementsByClassName("chkMontoPrestamo")[0].addEventListener("click", () => {
+
+        //fila.getElementsByClassName("ingresoNeto").style.color = "brown";
+    //    const ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
+        const prestamoIn = fila.getElementsByClassName("chkMontoPrestamo")[0]
+     //   const prestamoOut = fila.getElementsByClassName("outPutMontoPP")[0]
+        if (prestamoIn.checked) {
+
+            document.getElementsByClassName("chkMontoPrestamo")[0].style.color = "black"
+        } else {
+            document.getElementsByClassName("chkMontoPrestamo")[0].style.color = "brown"
+        }
+    })
+
+    
+    // fila.getElementsByClassName("chkMontoPrestamo")[0].addEventListener("click", () => {
+    //     const ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
+    //     const prestamoIn = fila.getElementsByClassName("chkMontoPrestamo")[0]
+    //     const prestamoOut = fila.getElementsByClassName("outPutMontoPP")[0]
+    //     if (prestamoIn.checked) {
+    //         prestamoOut.innerText = "$ " + calculoPrestamo(ingresoNetoIn);
+    //     } else {
+    //         prestamoOut.innerText = "";
+    //     }
+    // })
+
+    fila.getElementsByClassName("tv")[0].addEventListener("click", () => {
+        const ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
+        const tarjeVisaIn = fila.getElementsByClassName("tv")[0]
+        const tarjeVisaOut = fila.getElementsByClassName("outPutTV")[0]
+        if (tarjeVisaIn.checked) {
+            tarjeVisaOut.innerText = "$ " + calculoTarjeta(ingresoNetoIn);
+        } else {
+            tarjeVisaOut.innerText = "";
+        }
+    })
+
+
+    fila.getElementsByClassName("tm")[0].addEventListener("click", () => {
+        const ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
+        const tarjeMasterIn = fila.getElementsByClassName("tm")[0]
+        const tarjeMAsterOut = fila.getElementsByClassName("outPutTM")[0]
+        if (tarjeMasterIn.checked) {
+            tarjeMAsterOut.innerText = "$ " + calculoTarjeta(ingresoNetoIn);
+        } else {
+            tarjeMAsterOut.innerText = "";
+        }
+    })
+
+    fila.getElementsByClassName("cc")[0].addEventListener("click", () => {
+        const ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
+        const CuentaCorrienteIn = fila.getElementsByClassName("cc")[0]
+        const CuentaCorrienteInOut = fila.getElementsByClassName("outPutCC")[0]
+        if (CuentaCorrienteIn.checked) {
+            CuentaCorrienteInOut.innerText = "$ " + calculoCuentaCorriente(ingresoNetoIn);
+        } else {
+            CuentaCorrienteInOut.innerText = "";
+        }
+    })
+
+    fila.getElementsByClassName("ca")[0].addEventListener("click", () => {
+        const ca = fila.getElementsByClassName("ca")[0]
+        const outPutCA = fila.getElementsByClassName("outPutCA")[0]
+        if (ca.checked) {
+            outPutCA.innerText = "c/Caja de Ahorro";
+        } else {
+            outPutCA.innerText = "s/Caja de Ahorro";
+        }
+    })
+    tabla.append(fila)
+
+    // listaEmpleados.push(new Empleado("", "", 0, 0, 0, 0, 0, false))
 }
 
 
-function eliminarFila(id) {
-    let elemento = document.getElementById(id)
+
+function calculoPrestamo(entradaIngresoNeto) {
+    let ingresoNeto = parseInt(entradaIngresoNeto)
+    return 3 * ((ingresoNeto * PRESTAMO) / 100)
 }
 
 
-
-
-
-function checkMontoPP() {
-    //debugger
-    const chkMontoPrestamo = document.getElementById("chkMontoPrestamo")
-    const outPutMontoPP = document.getElementById("outPutMontoPP")
-    //let calcPrestamo = calculoPrestamo()
-    if (chkMontoPrestamo.checked) {
-        outPutMontoPP.innerText = "monto de ejempo " + calculoPrestamo();
-    } else {
-        outPutMontoPP.innerText = "";
-    }
+function calculoTarjeta(entradaIngresoNeto) {
+    let ingresoNeto = parseInt(entradaIngresoNeto)
+    return 3 * ((ingresoNeto * TARJETA) / 100)
 }
 
 
-function calculoPrestamo() {
-    let ingresoNeto = parseInt(document.getElementById("ingresoNeto").value)
-    return ingresoNeto - ((ingresoNeto * PRESTAMO) / 100)
+function calculoCuentaCorriente(entradaIngresoNeto) {
+    let ingresoNeto = parseInt(entradaIngresoNeto)
+    return ((ingresoNeto * CC) / 100)
 }
 
-
-function listarTr() {
-    return document.getElementsByClassName("tr");
-}
-
-function listarTd() {
-    return document.getElementsByClassName("td");
-}
-
-function listar() {
-    const lista = listarTr();
-
-    for (const list of lista) {
-        console.log(list)
-    }
-
-}
 
 function enviarListaMasiva() {
-    debugger
+    // debugger
     const listaNombre = document.getElementsByClassName("nombreEmpleado")
     const listaApellido = document.getElementsByClassName("apellidoEmpleado")
     const listaingresoNeto = document.getElementsByClassName("ingresoNeto")
@@ -80,34 +149,39 @@ function enviarListaMasiva() {
     const listaMontoTv = document.getElementsByClassName("outPutTV")
     const listaMontoTm = document.getElementsByClassName("outPutTM")
     const listaMontoCc = document.getElementsByClassName("outPutCC")
-    const listaCa = document.getElementsByClassName("ca")
-    
+    const listaCa = document.getElementsByClassName("outPutCA")
 
+    for (let i = 0; i < listaNombre.length; i++) {
 
-    for (let i = 0; i < acum; i++) {
-        
-     console.log(listaNombre[i].value + listaApellido[i].value +listaingresoNeto[i].value + listaMontoPp[i].value + listaMontoTv[i].value + listaMontoTm[i].value + listaMontoCc[i].value + listaCa[i].value)
-
+        console.log(listaNombre[i].value +
+            listaApellido[i].value +
+            listaingresoNeto[i].value +
+            listaMontoPp[i].innerText.slice(2) +
+            listaMontoTv[i].innerText.slice(2) +
+            listaMontoTm[i].innerText.slice(2) +
+            listaMontoCc[i].innerText.slice(2) +
+            listaCa[i].innerText
+        )
     }
 
 
 
 
-   // const tr = listarTr()
-   // return tr[0].getElementsByClassName("td")
+    // const tr = listarTr()
+    // return tr[0].getElementsByClassName("td")
 
     //const tr = listarTr()
-  /*  for (let i = 0; i < listaEmpleados.length; i++) {
-        listaEmpleados[i].nombre = tr[i].document.getElementById("nombreEmpleado").value
-        listaEmpleados[i].apellido = tr[i].document.getElementById("apellidoEmpleado").value
-        listaEmpleados[i].ingresoNeto = tr[i].document.getElementById("ingresoNeto").value
-        listaEmpleados[i].montoPrestamo = tr[i].document.getElementById("outPutMontoPP").value
-        listaEmpleados[i].montoVisa = tr[i].document.getElementById("tv").value
-        listaEmpleados[i].montoMaster = tr[i].document.getElementById("tm").value
-        listaEmpleados[i].montoCuentaCorriente = tr[i].document.getElementById("cc").value
-        listaEmpleados[i].cajaAhorro = tr[i].document.getElementById("ca").value
-    }
-    */
+    /*  for (let i = 0; i < listaEmpleados.length; i++) {
+          listaEmpleados[i].nombre = tr[i].document.getElementById("nombreEmpleado").value
+          listaEmpleados[i].apellido = tr[i].document.getElementById("apellidoEmpleado").value
+          listaEmpleados[i].ingresoNeto = tr[i].document.getElementById("ingresoNeto").value
+          listaEmpleados[i].montoPrestamo = tr[i].document.getElementById("outPutMontoPP").value
+          listaEmpleados[i].montoVisa = tr[i].document.getElementById("tv").value
+          listaEmpleados[i].montoMaster = tr[i].document.getElementById("tm").value
+          listaEmpleados[i].montoCuentaCorriente = tr[i].document.getElementById("cc").value
+          listaEmpleados[i].cajaAhorro = tr[i].document.getElementById("ca").value
+      }
+      */
 }
 
 
