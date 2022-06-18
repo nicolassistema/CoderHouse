@@ -33,20 +33,6 @@ formula para obtener el interes ganado + capital invertido   --> (((100000 * 47)
 
 */
 
-class Producto {
-    constructor(nombre, numeroCalculo) {
-        this.nombre = nombre;
-        this.numeroCalculo = numeroCalculo;
-    }
-}
-
-class Sucursales {
-    constructor(nombreSucursal, nombreBarrio) {
-        this.nombreSucursal = nombreSucursal
-        this.nombreBarrio = nombreBarrio;
-    }
-}
-
 
 class EnvioMasivo {
     constructor(nombreEmpresa, listaEmpleados){
