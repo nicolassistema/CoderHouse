@@ -48,6 +48,13 @@ class Sucursales {
 }
 
 
+class EnvioMasivo {
+    constructor(nombreEmpresa, listaEmpleados){
+        this.nombreEmpresa = nombreEmpresa;
+        this.listaEmpleados = listaEmpleados;
+    }
+}
+
 class Empleado {
     constructor(nombre,apellido,ingresoNeto,montoPrestamo,montoVisa,montoMaster, montoCuentaCorriente, cajaAhorro){
         this.nombre=nombre

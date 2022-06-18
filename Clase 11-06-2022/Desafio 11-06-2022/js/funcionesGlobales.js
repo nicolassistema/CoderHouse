@@ -1,97 +1,74 @@
 //init
 const listaEmpleados = [];
-const listFila = [];
-const tabla = document.getElementById("tabla")
+const listaEnvioMasivo = [];
+const tabla = document.getElementById("tabla");
 
 
 function agregarFila() {
     //  debugger
 
     let fila = document.createElement("tr")
-    fila.innerHTML = `<td class="td"> <input type="text" class="nombreEmpleado" placeholder="juan"> </td> 
-<td class="td"> <input type="text" class="apellidoEmpleado" placeholder="gomez"> </td> 
-<td class="td"> <input type="text" class="ingresoNeto" placeholder="100000"> </td> 
-<td class="td"> <input type="checkbox" class="chkMontoPrestamo"> <p class="outPutMontoPP"></p> </td> 
-<td class="td"> <input type="checkbox" class="cc" > <p class="outPutCC"></p></td> 
+    fila.innerHTML = `<td class="td"> <input type="text" class="nombreEmpleado" placeholder="" > </td> 
+<td class="td"> <input type="text" class="apellidoEmpleado" placeholder=""> </td> 
+<td class="td"> <input type="text" class="ingresoNeto" placeholder=""> </td> 
+<td class="td"> <input type="checkbox" class="chkMontoPrestamo"> <p class="outPutMontoPP">$ 0</p> </td> 
+<td class="td"> <input type="checkbox" class="cc" > <p class="outPutCC">$ 0</p></td> 
 <td class="td"> <input type="checkbox" class="ca" > <p class="outPutCA">s/ Caja de Ahorro</p></td> 
-<td class="td"> <input type="checkbox" class="tv" > <p class="outPutTV"></p></td> 
-<td class="td"> <input type="checkbox" class="tm" ><p class="outPutTM"></p> </td> 
+<td class="td"> <input type="checkbox" class="tv" > <p class="outPutTV">$ 0</p></td> 
+<td class="td"> <input type="checkbox" class="tm" ><p class="outPutTM">$ 0</p> </td> 
 <td class="td"> <button role="button"  class="rmvButton" >X</button> </td>`
 
     fila.getElementsByClassName("rmvButton")[0].addEventListener("click", () => {
-        // if(confirm("Queres volar a la verga esto?")){
+        // if(confirm("Esta seguro que desea eliminar el empleado?")){
         fila.remove();
         // }
     })
 
 
 
-
-
-
     fila.getElementsByClassName("ingresoNeto")[0].addEventListener("change", () => {
+
         const ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
-        const prestamoIn = fila.getElementsByClassName("chkMontoPrestamo")[0]
         const prestamoOut = fila.getElementsByClassName("outPutMontoPP")[0]
-     //   if (prestamoIn.checked) {
-            prestamoOut.innerText = "$ " + calculoPrestamo(ingresoNetoIn);
-     //   } else {
-      //      prestamoOut.innerText = "grisado $ " + calculoPrestamo(ingresoNetoIn);
-      //  }
+        const cc = fila.getElementsByClassName("outPutCC")[0]
+        const tv = fila.getElementsByClassName("outPutTV")[0]
+        const tm = fila.getElementsByClassName("outPutTM")[0]
+
+        prestamoOut.innerText = "$ " + calculoPrestamo(ingresoNetoIn);
+        cc.innerText = "$ " + calculoCuentaCorriente(ingresoNetoIn);
+        tv.innerText = "$ " + calculoTarjeta(ingresoNetoIn);
+        tm.innerText = "$ " + calculoTarjeta(ingresoNetoIn);
+
     })
-
-
-
-
-   
 
 
     fila.getElementsByClassName("chkMontoPrestamo")[0].addEventListener("click", () => {
 
-        //fila.getElementsByClassName("ingresoNeto").style.color = "brown";
-    //    const ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
         const prestamoIn = fila.getElementsByClassName("chkMontoPrestamo")[0]
-     //   const prestamoOut = fila.getElementsByClassName("outPutMontoPP")[0]
         if (prestamoIn.checked) {
 
-            document.getElementsByClassName("chkMontoPrestamo")[0].style.color = "black"
+            fila.getElementsByClassName("outPutMontoPP")[0].style.color = "black"
         } else {
-            document.getElementsByClassName("chkMontoPrestamo")[0].style.color = "brown"
+            fila.getElementsByClassName("outPutMontoPP")[0].style.color = "#c8c4d1"
         }
     })
 
-    
-    // fila.getElementsByClassName("chkMontoPrestamo")[0].addEventListener("click", () => {
-    //     const ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
-    //     const prestamoIn = fila.getElementsByClassName("chkMontoPrestamo")[0]
-    //     const prestamoOut = fila.getElementsByClassName("outPutMontoPP")[0]
-    //     if (prestamoIn.checked) {
-    //         prestamoOut.innerText = "$ " + calculoPrestamo(ingresoNetoIn);
-    //     } else {
-    //         prestamoOut.innerText = "";
-    //     }
-    // })
-
     fila.getElementsByClassName("tv")[0].addEventListener("click", () => {
-        const ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
         const tarjeVisaIn = fila.getElementsByClassName("tv")[0]
-        const tarjeVisaOut = fila.getElementsByClassName("outPutTV")[0]
         if (tarjeVisaIn.checked) {
-            tarjeVisaOut.innerText = "$ " + calculoTarjeta(ingresoNetoIn);
+            fila.getElementsByClassName("outPutTV")[0].style.color = "black"
         } else {
-            tarjeVisaOut.innerText = "";
+            fila.getElementsByClassName("outPutTV")[0].style.color = "#c8c4d1"
         }
     })
 
 
     fila.getElementsByClassName("tm")[0].addEventListener("click", () => {
-        const ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
         const tarjeMasterIn = fila.getElementsByClassName("tm")[0]
-        const tarjeMAsterOut = fila.getElementsByClassName("outPutTM")[0]
         if (tarjeMasterIn.checked) {
-            tarjeMAsterOut.innerText = "$ " + calculoTarjeta(ingresoNetoIn);
+            fila.getElementsByClassName("outPutTM")[0].style.color = "black"
         } else {
-            tarjeMAsterOut.innerText = "";
+            fila.getElementsByClassName("outPutTM")[0].style.color = "#c8c4d1"
         }
     })
 
@@ -100,9 +77,9 @@ function agregarFila() {
         const CuentaCorrienteIn = fila.getElementsByClassName("cc")[0]
         const CuentaCorrienteInOut = fila.getElementsByClassName("outPutCC")[0]
         if (CuentaCorrienteIn.checked) {
-            CuentaCorrienteInOut.innerText = "$ " + calculoCuentaCorriente(ingresoNetoIn);
+            fila.getElementsByClassName("outPutCC")[0].style.color = "black"
         } else {
-            CuentaCorrienteInOut.innerText = "";
+            fila.getElementsByClassName("outPutCC")[0].style.color = "#c8c4d1"
         }
     })
 
@@ -117,7 +94,6 @@ function agregarFila() {
     })
     tabla.append(fila)
 
-    // listaEmpleados.push(new Empleado("", "", 0, 0, 0, 0, 0, false))
 }
 
 
@@ -151,37 +127,81 @@ function enviarListaMasiva() {
     const listaMontoCc = document.getElementsByClassName("outPutCC")
     const listaCa = document.getElementsByClassName("outPutCA")
 
-    for (let i = 0; i < listaNombre.length; i++) {
 
-        console.log(listaNombre[i].value +
-            listaApellido[i].value +
-            listaingresoNeto[i].value +
-            listaMontoPp[i].innerText.slice(2) +
-            listaMontoTv[i].innerText.slice(2) +
-            listaMontoTm[i].innerText.slice(2) +
-            listaMontoCc[i].innerText.slice(2) +
-            listaCa[i].innerText
-        )
+    if (listaNombre.length > 0) {
+        if (validadorGeneral()) {
+
+            for (let i = 0; i < listaNombre.length; i++) {
+                listaEmpleados.push(new Empleado(listaNombre[i].value,
+                    listaApellido[i].value,
+                    listaingresoNeto[i].value,
+                    listaMontoPp[i].innerText.slice(2),
+                    listaMontoTv[i].innerText.slice(2),
+                    listaMontoTm[i].innerText.slice(2),
+                    listaMontoCc[i].innerText.slice(2),
+                    listaCa[i].innerText))
+
+            }
+            listaEnvioMasivo.push(new EnvioMasivo("pepe", listaEmpleados))
+            alert("La lista de empleados de genero exitosamente")
+        } else {
+
+            alert("Por favor cargar campos obligatorios")
+        }
+    }else{
+        alert("No ingreso ningun registro. Por favor cargar por lo menos un Empleado")
     }
 
 
+}
 
 
-    // const tr = listarTr()
-    // return tr[0].getElementsByClassName("td")
+function validadorGeneral() {
 
-    //const tr = listarTr()
-    /*  for (let i = 0; i < listaEmpleados.length; i++) {
-          listaEmpleados[i].nombre = tr[i].document.getElementById("nombreEmpleado").value
-          listaEmpleados[i].apellido = tr[i].document.getElementById("apellidoEmpleado").value
-          listaEmpleados[i].ingresoNeto = tr[i].document.getElementById("ingresoNeto").value
-          listaEmpleados[i].montoPrestamo = tr[i].document.getElementById("outPutMontoPP").value
-          listaEmpleados[i].montoVisa = tr[i].document.getElementById("tv").value
-          listaEmpleados[i].montoMaster = tr[i].document.getElementById("tm").value
-          listaEmpleados[i].montoCuentaCorriente = tr[i].document.getElementById("cc").value
-          listaEmpleados[i].cajaAhorro = tr[i].document.getElementById("ca").value
-      }
-      */
+    const listaValidaciones = []
+    const listaNombre = document.getElementsByClassName("nombreEmpleado")
+    const listaApellido = document.getElementsByClassName("apellidoEmpleado")
+    const listaingresoNeto = document.getElementsByClassName("ingresoNeto")
+
+    for (let i = 0; i < listaNombre.length; i++) {
+        if (!validarNombre(listaNombre[i].value)) {
+
+
+            listaNombre[i].style.borderColor = "red";
+            listaValidaciones.push(false)
+
+
+        } else {
+            listaNombre[i].style.borderColor = "black";
+            listaValidaciones.push(true)
+        }
+
+        if (!validarNombre(listaApellido[i].value)) {
+            listaApellido[i].style.borderColor = "red";
+            listaValidaciones.push(false)
+        } else {
+
+            listaApellido[i].style.borderColor = "black";
+            listaValidaciones.push(true)
+        }
+
+        if (!validarNumeroPositivo(listaingresoNeto[i].value)) {
+            listaingresoNeto[i].style.borderColor = "red";
+            listaValidaciones.push(false)
+        } else {
+
+            listaingresoNeto[i].style.borderColor = "black";
+            listaValidaciones.push(true)
+        }
+
+    }
+    for (listaValid of listaValidaciones) {
+        if (!listaValid) {
+            return listaValid;
+        }
+    }
+
+    return true
 }
 
 
@@ -368,22 +388,22 @@ function enviarListaMasiva() {
 // }
 
 
-// function validarNumeroPositivo(numero) {
-//     let flag = false;
-//     if (!isNaN(numero)) {
-//         if (numero > 0) {
-//             flag = true;
-//         }
-//     }
-//     return flag;
-// }
+function validarNumeroPositivo(numero) {
+    let flag = false;
+    if (!isNaN(numero)) {
+        if (numero > 0) {
+            flag = true;
+        }
+    }
+    return flag;
+}
 
-// function validarNombre(nombre) {
-//     let flag = false;
-//     if (isNaN(nombre)) {
-//         flag = true;
-//     }
-//     return flag;
-// }
+function validarNombre(nombre) {
+    let flag = false;
+    if (isNaN(nombre)) {
+        flag = true;
+    }
+    return flag;
+}
 
 
