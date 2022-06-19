@@ -108,8 +108,6 @@ function calculoCuentaCorriente(entradaIngresoNeto) {
 function enviarListaMasiva() {
     // debugger
 
-
-    const nombreEmpresa = document.getElementsByClassName("nombreEmpresa")[0].value
     const listaNombre = document.getElementsByClassName("nombreEmpleado")
     const listaApellido = document.getElementsByClassName("apellidoEmpleado")
     const listaingresoNeto = document.getElementsByClassName("ingresoNeto")
@@ -135,7 +133,9 @@ function enviarListaMasiva() {
             alert("La lista de empleados de genero exitosamente")
             alert(mostrarMensaje(listaEmpleados, nombreEmpresa))
 
-           
+            tabla.innerHTML = ""   
+            document.getElementsByClassName("nombreEmpresa")[0].value = ""
+
         } else {
             alert("Por favor cargar campos obligatorios")
         }
