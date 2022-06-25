@@ -2,6 +2,8 @@
 let listaEmpleados = [];
 const listaEnvioMasivo = [];
 const tabla = document.getElementById("tabla");
+const tablaDos = document.getElementById("tablaDos");
+
 
 
 function agregarFila() {
@@ -19,9 +21,9 @@ function agregarFila() {
     <td class="td"> <button role="button"  class="rmvButton" >X</button> </td>
      `
     fila.getElementsByClassName("rmvButton")[0].addEventListener("click", () => {
-         if(confirm("Esta seguro que desea eliminar el empleado?")){
-        fila.remove();
-         }
+        if (confirm("Esta seguro que desea eliminar el empleado?")) {
+            fila.remove();
+        }
     })
 
     fila.getElementsByClassName("ingresoNeto")[0].addEventListener("change", () => {
@@ -133,11 +135,11 @@ function enviarListaMasiva() {
             let envioMasivo = new EnvioMasivo(nombreEmpresa, listaEmpleados)
             listaEnvioMasivo.push(envioMasivo)
             guardar(listaEnvioMasivo)
-           
+
             alert("La lista de empleados de genero exitosamente")
             alert(mostrarMensaje(listaEmpleados, nombreEmpresa))
-             listaEmpleados = [];
-            tabla.innerHTML = ""   
+            listaEmpleados = [];
+            tabla.innerHTML = ""
             document.getElementsByClassName("nombreEmpresa")[0].value = ""
 
         } else {
@@ -201,8 +203,8 @@ function validadorGeneral() {
 
 
 function guardar(envioMasivo) {
-        let str = JSON.stringify(envioMasivo)
-        localStorage.setItem("envioMasivo", str)
+    let str = JSON.stringify(envioMasivo)
+    localStorage.setItem("envioMasivo", str)
 }
 
 function obtenerTodo() {
@@ -229,13 +231,10 @@ function obtenerCargaMasiva(nombreEmpresa) {
 }
 
 
-
-
-
-
 function obtenerCargasMasivaTodas() {
+    console.log("entro a la funcion")
     const listaDeCargaMasiva = JSON.parse(localStorage.getItem("envioMasivo"))
-    if(!!listaDeCargaMasiva){
+    if (!!listaDeCargaMasiva) {
         return listaDeCargaMasiva
     }
     return false
@@ -243,18 +242,18 @@ function obtenerCargasMasivaTodas() {
 
 
 function eliminarCargaMasivaXNombreEmpresa(nombreEmpresa) {
-   // debugger
+    // debugger
     let empresa
     let listaDeCargaMasiva = JSON.parse(localStorage.getItem("envioMasivo"))
     for (item of listaDeCargaMasiva) {
-            if (nombreEmpresa == item.nombreEmpresa) {
-                if(listaDeCargaMasiva.length > 1){
+        if (nombreEmpresa == item.nombreEmpresa) {
+            if (listaDeCargaMasiva.length > 1) {
                 empresa = item.nombreEmpresa
                 listaDeCargaMasiva = listaDeCargaMasiva.filter(item => item.nombreEmpresa !== empresa)
                 localStorage.removeItem("envioMasivo")
                 guardar(listaDeCargaMasiva)
                 return empresa
-            }else{
+            } else {
                 empresa = item.nombreEmpresa
                 localStorage.removeItem("envioMasivo")
                 return empresa
@@ -262,12 +261,75 @@ function eliminarCargaMasivaXNombreEmpresa(nombreEmpresa) {
         }
     }
     return false
+}
+
+
+function cargaTablaEmpresas() {
+    let listaEmpresas = obtenerCargasMasivaTodas()
+
+    for (item of listaEmpresas) {
+        let filaEmpresas = document.createElement("tr")
+        filaEmpresas.innerHTML = `
+        <td class="td"> <p> ${item.nombreEmpresa}</p> </td> 
+        <td class="td"> <p> ${item.listaEmpleados.length}</p> </td> 
+        <td class="td"> <button role="button"  class="detailButton" >DETALLE</button> </td>
+         `
+
+         filaEmpresas.getElementsByClassName("detailButton")[0].addEventListener("click", () => {
+  
+//             let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+// width=0,height=0,left=-1000,top=-1000`;
+
+let params = `<h1>lalalalallal</h1>`;
+detalleEmpresa(item.listaEmpleados) 
+open("detalle.html", "test", params);
+        // for (itemDos of filaEmpresas) {
+            
+        // }
+
+        //     if (confirm(`${filaEmpresas}`)) {
+                
+        //     }
+        })
+
+        tablaDos.append(filaEmpresas)
+    }
+}
+
+
+cargaTablaEmpresas()
+
+
+function detalleEmpresa(lista) {
+
+   const tablaDetalle = document.getElementById("tablaDetalle");
+
+    for (item of lista) {
+        let filaDetalle = document.createElement("tr")
+        filaDetalle.innerHTML = `
+        <td class="td"> <input type="text" class="nombreEmpleado" placeholder="" title="Ingresar solo caracteres letras" > </td> 
+        <td class="td"> <input type="text" class="apellidoEmpleado" placeholder="" title="Ingresar solo caracteres letras"> </td> 
+        <td class="td"> <input type="text" class="ingresoNeto" placeholder="" title="Ingresar solo caracteres numeros positivos"> </td> 
+        <td class="td"> <input type="checkbox" class="chkMontoPrestamo"> <p class="outPutMontoPP">$ 0</p> </td> 
+        <td class="td"> <input type="checkbox" class="cc" > <p class="outPutCC">$ 0</p></td> 
+        <td class="td"> <input type="checkbox" class="ca" > <p class="outPutCA">s/ Caja de Ahorro</p></td> 
+        <td class="td"> <input type="checkbox" class="tv" > <p class="outPutTV">$ 0</p></td> 
+        <td class="td"> <input type="checkbox" class="tm" ><p class="outPutTM">$ 0</p> </td> 
+        `
+        tablaDetalle.append(filaDetalle)
+        
+    }    
+
+
     
 }
 
 
 
-
+function refrescarListaEmpresas() {
+    tablaDos.innerHTML = ""
+    cargaTablaEmpresas()
+}
 
 
 function mostrarMensaje(listaEmpleados, nombreEmpresa) {
