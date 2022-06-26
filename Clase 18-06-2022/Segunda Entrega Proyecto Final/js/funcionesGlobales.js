@@ -266,65 +266,46 @@ function eliminarCargaMasivaXNombreEmpresa(nombreEmpresa) {
 
 function cargaTablaEmpresas() {
     let listaEmpresas = obtenerCargasMasivaTodas()
-
-    for (item of listaEmpresas) {
+    let mensaje = "";
+   console.log(listaEmpresas)
+    for (let item of listaEmpresas) {
         let filaEmpresas = document.createElement("tr")
+        let mensaje = detalleEmpresa(item.listaEmpleados)
+      let columna = document.createElement("td")  
+       let boton = document.createElement("button")
+       boton.innerText = `Detalle`
+       boton.className  = "detailButton"
+       boton.addEventListener("click", ()=>{
+        mostrarDetalle(mensaje)
+       })
+       columna.append(boton)
+       columna.className = "td"
         filaEmpresas.innerHTML = `
         <td class="td"> <p> ${item.nombreEmpresa}</p> </td> 
         <td class="td"> <p> ${item.listaEmpleados.length}</p> </td> 
-        <td class="td"> <button role="button"  class="detailButton" >DETALLE</button> </td>
          `
+         filaEmpresas.append(columna)
 
-         filaEmpresas.getElementsByClassName("detailButton")[0].addEventListener("click", () => {
-  
-//             let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-// width=0,height=0,left=-1000,top=-1000`;
-
-let params = `<h1>lalalalallal</h1>`;
-detalleEmpresa(item.listaEmpleados) 
-open("detalle.html", "test", params);
-        // for (itemDos of filaEmpresas) {
-            
-        // }
-
-        //     if (confirm(`${filaEmpresas}`)) {
-                
-        //     }
-        })
-
-        tablaDos.append(filaEmpresas)
+       tablaDos.append(filaEmpresas)
+    
     }
 }
 
 
-cargaTablaEmpresas()
-
-
-function detalleEmpresa(lista) {
-
-   const tablaDetalle = document.getElementById("tablaDetalle");
-
-    for (item of lista) {
-        let filaDetalle = document.createElement("tr")
-        filaDetalle.innerHTML = `
-        <td class="td"> <input type="text" class="nombreEmpleado" placeholder="" title="Ingresar solo caracteres letras" > </td> 
-        <td class="td"> <input type="text" class="apellidoEmpleado" placeholder="" title="Ingresar solo caracteres letras"> </td> 
-        <td class="td"> <input type="text" class="ingresoNeto" placeholder="" title="Ingresar solo caracteres numeros positivos"> </td> 
-        <td class="td"> <input type="checkbox" class="chkMontoPrestamo"> <p class="outPutMontoPP">$ 0</p> </td> 
-        <td class="td"> <input type="checkbox" class="cc" > <p class="outPutCC">$ 0</p></td> 
-        <td class="td"> <input type="checkbox" class="ca" > <p class="outPutCA">s/ Caja de Ahorro</p></td> 
-        <td class="td"> <input type="checkbox" class="tv" > <p class="outPutTV">$ 0</p></td> 
-        <td class="td"> <input type="checkbox" class="tm" ><p class="outPutTM">$ 0</p> </td> 
-        `
-        tablaDetalle.append(filaDetalle)
-        
-    }    
-
-
-    
+function mostrarDetalle(item) {
+    alert("mensaje: " + item)
 }
 
 
+function detalleEmpresa(lista) {
+    let mensaje = ""
+    for (let item of lista) {
+        mensaje += " " + item.nombre
+    }
+return mensaje
+}
+
+cargaTablaEmpresas()
 
 function refrescarListaEmpresas() {
     tablaDos.innerHTML = ""
