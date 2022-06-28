@@ -6,6 +6,7 @@ let listaEnvioMasivo = [];
 const tabla = document.getElementById("tabla");
 const tablaDos = document.getElementById("tablaDos");
 
+harcodEmpresas()
 
 function agregarFila() {
     //  debugger
@@ -300,7 +301,7 @@ function harcodEmpresas() {
     }
 }
 
-harcodEmpresas()
+//harcodEmpresas()
 
 function obtenerEmpresas() {
     const listaDeCargaMasiva = JSON.parse(localStorage.getItem("envioMasivo"))

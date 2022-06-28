@@ -1,9 +1,9 @@
 
-let listaUsuarios = []
+const listaUsuarios = []
 
 
 //precarga de datos
-harcodUsuarios()
+
 
 function harcodUsuarios() {
     if (obtenerUsuarios() == false) {
@@ -13,6 +13,8 @@ function harcodUsuarios() {
         localStorage.setItem("listaUsuarios", str)
     }
 }
+
+harcodUsuarios()
 
 
 function obtenerUsuarios() {
