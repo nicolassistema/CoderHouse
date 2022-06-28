@@ -7,8 +7,6 @@ const tabla = document.getElementById("tabla");
 const tablaDos = document.getElementById("tablaDos");
 
 
-
-
 function agregarFila() {
     //  debugger
     let fila = document.createElement("tr")
@@ -50,19 +48,6 @@ function agregarFila() {
         let tv = fila.getElementsByClassName("outPutTV")[0]
         let tm = fila.getElementsByClassName("outPutTM")[0]
         let cajaAhorro = fila.getElementsByClassName("outPutCA")[0]
-
-
-        // const prestamoIn = fila.getElementsByClassName("chkMontoPrestamo")[0]
-        // const tarjeVisaIn = fila.getElementsByClassName("tv")[0]
-        // const tarjeMasterIn = fila.getElementsByClassName("tm")[0]
-        // const CuentaCorrienteIn = fila.getElementsByClassName("cc")[0]
-        // const cajaAhorroIn = fila.getElementsByClassName("ca")[0]
-
-        // prestamoIn.disabled = true
-        // tarjeVisaIn.disabled = true
-        // tarjeMasterIn.disabled = true
-        // CuentaCorrienteIn.disabled = true
-        // cajaAhorroIn.disabled = true
 
 
         if (!validarNumeroPositivo(ingresoNetoIn) || ingresoNetoIn == "") {
@@ -115,7 +100,6 @@ function agregarFila() {
 
 
     fila.getElementsByClassName("tv")[0].addEventListener("click", () => {
-
         const tarjeVisaIn = fila.getElementsByClassName("tv")[0]
         let ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
         const tv = fila.getElementsByClassName("outPutTV")[0]
@@ -417,11 +401,11 @@ function visualizarDetalle(item) {
         mensaje += "Nombre: " + item.nombre + "\n"
         mensaje += "Apellido: " + item.apellido + "\n"
         mensaje += "Ingreso Neto: " + item.ingresoNeto + "\n"
-        mensaje += "Monto de Prestamo: " + item.montoPrestamo + "\n"
-        mensaje += "Monto de Tarjeta Visa: " + item.montoVisa + "\n"
-        mensaje += "Monto de Tarjeta Master: " + item.montoMaster + "\n"
-        mensaje += "Monto de Tarjeta Master: " + item.montoCuentaCorriente + "\n"
-        mensaje += "Monto de Tarjeta Master: " + item.cajaAhorro + "\n"
+        mensaje += item.montoPrestamo != 0 ? "Monto de Prestamo: " + item.montoPrestamo + "\n" : ""
+        mensaje += item.montoVisa != 0 ? "Monto de Tarjeta Visa: " + item.montoVisa + "\n" : ""
+        mensaje += item.montoMaster != 0 ? "Monto de Tarjeta Master: " + item.montoMaster + "\n" : "" 
+        mensaje += item.montoCuentaCorriente != 0 ? "Monto Cuenta Corriente: " + item.montoCuentaCorriente + "\n" : ""
+        mensaje += item.cajaAhorro + "\n"
         mensaje += "===================================== \n"
         return mensaje
     }
