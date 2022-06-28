@@ -31,63 +31,125 @@ function agregarFila() {
 
     fila.getElementsByClassName("ingresoNeto")[0].addEventListener("change", () => {
         //debugger
-        const ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
-        const prestamoOut = fila.getElementsByClassName("outPutMontoPP")[0]
-        const cc = fila.getElementsByClassName("outPutCC")[0]
-        const tv = fila.getElementsByClassName("outPutTV")[0]
-        const tm = fila.getElementsByClassName("outPutTM")[0]
+        let ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
+        let prestamoOut = fila.getElementsByClassName("outPutMontoPP")[0]
+        let cc = fila.getElementsByClassName("outPutCC")[0]
+        let tv = fila.getElementsByClassName("outPutTV")[0]
+        let tm = fila.getElementsByClassName("outPutTM")[0]
+        let cajaAhorro = fila.getElementsByClassName("outPutCA")[0]
 
-        if (validarNumeroPositivo(ingresoNetoIn) || ingresoNetoIn == "") {
-            prestamoOut.innerText = "$ " + (!isNaN(calculoPrestamo(ingresoNetoIn)) ? calculoPrestamo(ingresoNetoIn) : '0');
-            cc.innerText = "$ " + (!isNaN(calculoCuentaCorriente(ingresoNetoIn)) ? calculoCuentaCorriente(ingresoNetoIn) : "0");
-            tv.innerText = "$ " + (!isNaN(calculoTarjeta(ingresoNetoIn)) ? calculoTarjeta(ingresoNetoIn) : "0");
-            tm.innerText = "$ " + (!isNaN(calculoTarjeta(ingresoNetoIn)) ? calculoTarjeta(ingresoNetoIn) : "0");
+
+        const prestamoIn = fila.getElementsByClassName("chkMontoPrestamo")[0]
+        const tarjeVisaIn = fila.getElementsByClassName("tv")[0]
+        const tarjeMasterIn = fila.getElementsByClassName("tm")[0]
+        const CuentaCorrienteIn = fila.getElementsByClassName("cc")[0]
+        const cajaAhorroIn = fila.getElementsByClassName("ca")[0]
+
+        if (!validarNumeroPositivo(ingresoNetoIn) || ingresoNetoIn == "") {
+            prestamoIn.checked = false
+            tarjeVisaIn.checked = false
+            tarjeMasterIn.checked = false
+            CuentaCorrienteIn.checked = false
+            cajaAhorroIn.checked = false
+
+            fila.getElementsByClassName("outPutMontoPP")[0].style.color = "#c8c4d1"
+            fila.getElementsByClassName("outPutCC")[0].style.color = "#c8c4d1"
+            fila.getElementsByClassName("outPutTV")[0].style.color = "#c8c4d1"
+            fila.getElementsByClassName("outPutTM")[0].style.color = "#c8c4d1"
+            fila.getElementsByClassName("outPutCA")[0].style.color = "#c8c4d1"
+
+            prestamoIn.disabled = true;
+            tarjeVisaIn.disabled = true
+            tarjeMasterIn.disabled = true
+            CuentaCorrienteIn.disabled = true
+            cajaAhorroIn.disabled = true
+
+            cajaAhorro.innerText = "s/Caja de Ahorro" 
+            prestamoOut.innerText = "$ 0" 
+            cc.innerText = "$ 0" 
+            tv.innerText = "$ 0" 
+            tm.innerText = "$ 0" 
+        }else{
+            prestamoIn.disabled = false;
+            tarjeVisaIn.disabled = false
+            tarjeMasterIn.disabled = false
+            CuentaCorrienteIn.disabled = false
+            cajaAhorroIn.disabled = false
         }
     })
 
+
+
     fila.getElementsByClassName("chkMontoPrestamo")[0].addEventListener("click", () => {
         const prestamoIn = fila.getElementsByClassName("chkMontoPrestamo")[0]
+        let ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
+        let prestamoOut = fila.getElementsByClassName("outPutMontoPP")[0]
         if (prestamoIn.checked) {
-            fila.getElementsByClassName("outPutMontoPP")[0].style.color = "black"
+            prestamoOut.innerText = "$ " + (!isNaN(calculoPrestamo(ingresoNetoIn)) ? calculoPrestamo(ingresoNetoIn) : '0');
+            fila.getElementsByClassName("outPutMontoPP")[0].style.color = "#15f75b"
         } else {
+            prestamoOut.innerText = "$ 0"
             fila.getElementsByClassName("outPutMontoPP")[0].style.color = "#c8c4d1"
         }
     })
 
+
     fila.getElementsByClassName("tv")[0].addEventListener("click", () => {
+
         const tarjeVisaIn = fila.getElementsByClassName("tv")[0]
+        let ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
+        const tv = fila.getElementsByClassName("outPutTV")[0]
         if (tarjeVisaIn.checked) {
-            fila.getElementsByClassName("outPutTV")[0].style.color = "black"
+            tv.innerText = "$ " + (!isNaN(calculoTarjeta(ingresoNetoIn)) ? calculoTarjeta(ingresoNetoIn) : "0");
+            fila.getElementsByClassName("outPutTV")[0].style.color = "#15f75b"
         } else {
+            tv.innerText = "$ 0"
             fila.getElementsByClassName("outPutTV")[0].style.color = "#c8c4d1"
         }
     })
 
+
+
     fila.getElementsByClassName("tm")[0].addEventListener("click", () => {
         const tarjeMasterIn = fila.getElementsByClassName("tm")[0]
+        const ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
+        const tm = fila.getElementsByClassName("outPutTM")[0]
         if (tarjeMasterIn.checked) {
-            fila.getElementsByClassName("outPutTM")[0].style.color = "black"
+            tm.innerText = "$ " + (!isNaN(calculoTarjeta(ingresoNetoIn)) ? calculoTarjeta(ingresoNetoIn) : "0");
+            fila.getElementsByClassName("outPutTM")[0].style.color = "#15f75b"
         } else {
+            tm.innerText = "$ 0"
             fila.getElementsByClassName("outPutTM")[0].style.color = "#c8c4d1"
         }
     })
 
+
+
     fila.getElementsByClassName("cc")[0].addEventListener("click", () => {
         const CuentaCorrienteIn = fila.getElementsByClassName("cc")[0]
+        const ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
+        const cc = fila.getElementsByClassName("outPutCC")[0]
         if (CuentaCorrienteIn.checked) {
-            fila.getElementsByClassName("outPutCC")[0].style.color = "black"
+            cc.innerText = "$ " + (!isNaN(calculoCuentaCorriente(ingresoNetoIn)) ? calculoCuentaCorriente(ingresoNetoIn) : "0");
+            fila.getElementsByClassName("outPutCC")[0].style.color = "#15f75b"
         } else {
+            cc.innerText = "$ 0"
             fila.getElementsByClassName("outPutCC")[0].style.color = "#c8c4d1"
         }
     })
 
+
+
+
     fila.getElementsByClassName("ca")[0].addEventListener("click", () => {
         const ca = fila.getElementsByClassName("ca")[0]
-        const outPutCA = fila.getElementsByClassName("outPutCA")[0]
+        let outPutCA = fila.getElementsByClassName("outPutCA")[0]
         if (ca.checked) {
             outPutCA.innerText = "c/Caja de Ahorro";
+            outPutCA.style.color = "#15f75b"
         } else {
             outPutCA.innerText = "s/Caja de Ahorro";
+            outPutCA.style.color = "#c8c4d1"
         }
     })
     tabla.append(fila)
@@ -316,7 +378,7 @@ function cargaTablaEmpresas() {
 
 
 function mostrarDetalle(item) {
-    alert("mensaje: " + item)
+    alert( item)
 }
 
 
@@ -340,6 +402,7 @@ function visualizarDetalle(item) {
         mensaje += "Monto de Tarjeta Master: " + item.montoMaster + "\n"
         mensaje += "Monto de Tarjeta Master: " + item.montoCuentaCorriente + "\n"
         mensaje += "Monto de Tarjeta Master: " + item.cajaAhorro + "\n"
+        mensaje += "===================================== \n"
         return mensaje
     }
 }
@@ -372,6 +435,7 @@ function validarNombreEmpresa() {
 
 
 function validarNumeroPositivo(numero) {
+    
     let flag = false;
     if (!isNaN(numero)) {
         if (numero > 0) {
