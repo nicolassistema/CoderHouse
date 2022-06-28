@@ -3,8 +3,6 @@ const listaUsuarios = []
 
 
 //precarga de datos
-
-
 function harcodUsuarios() {
     if (obtenerUsuarios() == false) {
         listaUsuarios.push(new Usuario("pepe", "1234"))
@@ -27,27 +25,20 @@ function obtenerUsuarios() {
 
 
 function validarUsuario() {
-   
     let flag = false;
     const resultadoUsuarios = obtenerUsuarios()
-
-    if(resultadoUsuarios != false || !!resultadoUsuarios){
-    //    debugger
+    if (resultadoUsuarios != false || !!resultadoUsuarios) {
         const usuario = document.getElementById("login").value
         const password = document.getElementById("password").value
-
         for (item of resultadoUsuarios) {
-            if(item.nombreUsuario == usuario && item.password == password){
+            if (item.nombreUsuario == usuario && item.password == password) {
                 window.location.href = "ingreso.html";
                 flag = true;
                 break;
             }
         }
-     
-         if(!flag){
-             alert("El usuario y/o el password son incorrectos. Por favor ingresar de nuevo")
-         }
-
+        if (!flag) {
+            alert("El usuario y/o el password son incorrectos. Por favor ingresar de nuevo")
+        }
     }
-   
 }

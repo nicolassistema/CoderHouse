@@ -8,6 +8,7 @@ const tablaDos = document.getElementById("tablaDos");
 
 harcodEmpresas()
 
+//Arma en HTML la fila y luego restartea los controles de la misma y deja disponible los onClick de sus botones
 function agregarFila() {
     //  debugger
     let fila = document.createElement("tr")
@@ -70,12 +71,12 @@ function agregarFila() {
             CuentaCorrienteIn.disabled = true
             cajaAhorroIn.disabled = true
 
-            cajaAhorro.innerText = "s/Caja de Ahorro" 
-            prestamoOut.innerText = "$ 0" 
-            cc.innerText = "$ 0" 
-            tv.innerText = "$ 0" 
-            tm.innerText = "$ 0" 
-        }else{
+            cajaAhorro.innerText = "s/Caja de Ahorro"
+            prestamoOut.innerText = "$ 0"
+            cc.innerText = "$ 0"
+            tv.innerText = "$ 0"
+            tm.innerText = "$ 0"
+        } else {
             prestamoIn.disabled = false;
             tarjeVisaIn.disabled = false
             tarjeMasterIn.disabled = false
@@ -177,10 +178,10 @@ function calculoCuentaCorriente(entradaIngresoNeto) {
 }
 
 
-
+//Levanta todo los datos que se cargaron y los manda al local Storage.  Valida campos obligatorios
 function enviarListaMasiva() {
-   // debugger
-   let listaEmpleados = [];
+    // debugger
+    let listaEmpleados = [];
     const nombreEmpresa = document.getElementsByClassName("nombreEmpresa")[0].value
     const listaNombre = document.getElementsByClassName("nombreEmpleado")
     const listaApellido = document.getElementsByClassName("apellidoEmpleado")
@@ -203,8 +204,6 @@ function enviarListaMasiva() {
                     listaMontoCc[i].innerText.slice(2),
                     listaCa[i].innerText))
             }
-
-
             const listaEmpresas = obtenerEmpresas()
             localStorage.removeItem("envioMasivo")
             //listaEnvioMasivo = []
@@ -227,6 +226,7 @@ function enviarListaMasiva() {
 }
 
 
+//Valida todos los campos
 function validadorGeneral() {
 
     const listaValidaciones = []
@@ -277,14 +277,14 @@ function validadorGeneral() {
     return true
 }
 
-
+//Guarda objeto en localstorage
 function guardar(envioMasivo) {
     let str = JSON.stringify(envioMasivo)
     localStorage.setItem("envioMasivo", str)
 }
 
 
-
+//harcodea empresas
 function harcodEmpresas() {
     if (obtenerEmpresas() == false) {
         // const listaEmpresasHarcod = []
@@ -301,8 +301,7 @@ function harcodEmpresas() {
     }
 }
 
-//harcodEmpresas()
-
+//obtiene lista de empresas
 function obtenerEmpresas() {
     const listaDeCargaMasiva = JSON.parse(localStorage.getItem("envioMasivo"))
     if (!!listaDeCargaMasiva) {
@@ -311,6 +310,7 @@ function obtenerEmpresas() {
     return false
 }
 
+//obtiene empresa por nombre
 function obtenerCargaMasiva(nombreEmpresa) {
     const listaDeCargaMasiva = JSON.parse(localStorage.getItem("envioMasivo"))
     for (item of listaDeCargaMasiva) {
@@ -321,7 +321,7 @@ function obtenerCargaMasiva(nombreEmpresa) {
     return false
 }
 
-
+//carga toda la lista al local storaje
 function obtenerCargasMasivaTodas() {
     console.log("entro a la funcion")
     const listaDeCargaMasiva = JSON.parse(localStorage.getItem("envioMasivo"))
@@ -331,7 +331,7 @@ function obtenerCargasMasivaTodas() {
     return false
 }
 
-
+//Elimina empresa por nombre
 function eliminarCargaMasivaXNombreEmpresa(nombreEmpresa) {
     // debugger
     let empresa
@@ -355,6 +355,7 @@ function eliminarCargaMasivaXNombreEmpresa(nombreEmpresa) {
 }
 
 
+//carga lista de empesa con detalle
 function cargaTablaEmpresas() {
     let listaEmpresas = obtenerCargasMasivaTodas()
     let mensaje = "";
@@ -383,7 +384,7 @@ function cargaTablaEmpresas() {
 
 
 function mostrarDetalle(item) {
-    alert( item)
+    alert(item)
 }
 
 
@@ -397,14 +398,14 @@ function detalleEmpresa(lista) {
 
 
 function visualizarDetalle(item) {
-      if(!!item){
+    if (!!item) {
         let mensaje = "";
         mensaje += "Nombre: " + item.nombre + "\n"
         mensaje += "Apellido: " + item.apellido + "\n"
         mensaje += "Ingreso Neto: " + item.ingresoNeto + "\n"
         mensaje += item.montoPrestamo != 0 ? "Monto de Prestamo: " + item.montoPrestamo + "\n" : ""
         mensaje += item.montoVisa != 0 ? "Monto de Tarjeta Visa: " + item.montoVisa + "\n" : ""
-        mensaje += item.montoMaster != 0 ? "Monto de Tarjeta Master: " + item.montoMaster + "\n" : "" 
+        mensaje += item.montoMaster != 0 ? "Monto de Tarjeta Master: " + item.montoMaster + "\n" : ""
         mensaje += item.montoCuentaCorriente != 0 ? "Monto Cuenta Corriente: " + item.montoCuentaCorriente + "\n" : ""
         mensaje += item.cajaAhorro + "\n"
         mensaje += "===================================== \n"
@@ -415,6 +416,8 @@ function visualizarDetalle(item) {
 
 cargaTablaEmpresas()
 
+
+//refresca lista de empesas cargadas en detalle
 function refrescarListaEmpresas() {
     tablaDos.innerHTML = ""
     cargaTablaEmpresas()
@@ -440,7 +443,7 @@ function validarNombreEmpresa() {
 
 
 function validarNumeroPositivo(numero) {
-    
+
     let flag = false;
     if (!isNaN(numero)) {
         if (numero > 0) {
