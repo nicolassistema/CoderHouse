@@ -29,7 +29,20 @@ function agregarFila() {
         }
     })
 
-    fila.getElementsByClassName("ingresoNeto")[0].addEventListener("change", () => {
+
+    const prestamoIn = fila.getElementsByClassName("chkMontoPrestamo")[0]
+    const tarjeVisaIn = fila.getElementsByClassName("tv")[0]
+    const tarjeMasterIn = fila.getElementsByClassName("tm")[0]
+    const CuentaCorrienteIn = fila.getElementsByClassName("cc")[0]
+    const cajaAhorroIn = fila.getElementsByClassName("ca")[0]
+
+    prestamoIn.disabled = true
+    tarjeVisaIn.disabled = true
+    tarjeMasterIn.disabled = true
+    CuentaCorrienteIn.disabled = true
+    cajaAhorroIn.disabled = true
+
+    fila.getElementsByClassName("ingresoNeto")[0].addEventListener("mousemove", () => {
         //debugger
         let ingresoNetoIn = fila.getElementsByClassName("ingresoNeto")[0].value
         let prestamoOut = fila.getElementsByClassName("outPutMontoPP")[0]
@@ -39,11 +52,18 @@ function agregarFila() {
         let cajaAhorro = fila.getElementsByClassName("outPutCA")[0]
 
 
-        const prestamoIn = fila.getElementsByClassName("chkMontoPrestamo")[0]
-        const tarjeVisaIn = fila.getElementsByClassName("tv")[0]
-        const tarjeMasterIn = fila.getElementsByClassName("tm")[0]
-        const CuentaCorrienteIn = fila.getElementsByClassName("cc")[0]
-        const cajaAhorroIn = fila.getElementsByClassName("ca")[0]
+        // const prestamoIn = fila.getElementsByClassName("chkMontoPrestamo")[0]
+        // const tarjeVisaIn = fila.getElementsByClassName("tv")[0]
+        // const tarjeMasterIn = fila.getElementsByClassName("tm")[0]
+        // const CuentaCorrienteIn = fila.getElementsByClassName("cc")[0]
+        // const cajaAhorroIn = fila.getElementsByClassName("ca")[0]
+
+        // prestamoIn.disabled = true
+        // tarjeVisaIn.disabled = true
+        // tarjeMasterIn.disabled = true
+        // CuentaCorrienteIn.disabled = true
+        // cajaAhorroIn.disabled = true
+
 
         if (!validarNumeroPositivo(ingresoNetoIn) || ingresoNetoIn == "") {
             prestamoIn.checked = false
