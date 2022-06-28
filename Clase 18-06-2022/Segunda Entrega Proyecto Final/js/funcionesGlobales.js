@@ -1,8 +1,11 @@
 //init
-let listaEmpleados = [];
-const listaEnvioMasivo = [];
+//let listaEmpleados = [];
+let listaEmpresas = [];
+
+let listaEnvioMasivo = [];
 const tabla = document.getElementById("tabla");
 const tablaDos = document.getElementById("tablaDos");
+
 
 
 
@@ -107,8 +110,10 @@ function calculoCuentaCorriente(entradaIngresoNeto) {
 }
 
 
+
 function enviarListaMasiva() {
-    // debugger
+   // debugger
+   let listaEmpleados = [];
     const nombreEmpresa = document.getElementsByClassName("nombreEmpresa")[0].value
     const listaNombre = document.getElementsByClassName("nombreEmpleado")
     const listaApellido = document.getElementsByClassName("apellidoEmpleado")
@@ -132,9 +137,13 @@ function enviarListaMasiva() {
                     listaCa[i].innerText))
             }
 
+
+            const listaEmpresas = obtenerEmpresas()
+            localStorage.removeItem("envioMasivo")
+            //listaEnvioMasivo = []
             let envioMasivo = new EnvioMasivo(nombreEmpresa, listaEmpleados)
-            listaEnvioMasivo.push(envioMasivo)
-            guardar(listaEnvioMasivo)
+            listaEmpresas.push(envioMasivo)
+            guardar(listaEmpresas)
 
             alert("La lista de empleados de genero exitosamente")
             alert(mostrarMensaje(listaEmpleados, nombreEmpresa))
@@ -207,17 +216,32 @@ function guardar(envioMasivo) {
     localStorage.setItem("envioMasivo", str)
 }
 
-function obtenerTodo() {
+
+
+function harcodEmpresas() {
+    if (obtenerEmpresas() == false) {
+        // const listaEmpresasHarcod = []
+        let listaEmpleadosHarcod = []
+        listaEmpleadosHarcod.push(new Empleado("pedro", "gomez", "150000", "180000.00", "112500.00", "112500.00", "15000.00", "c/Caja de Ahorro"))
+        listaEmpleadosHarcod.push(new Empleado("juan", "fernandez", "150000", "180000.00", "112500.00", "112500.00", "15000.00", "c/Caja de Ahorro"))
+        listaEnvioMasivo.push(new EnvioMasivo("Empersa1", listaEmpleadosHarcod))
+        listaEmpleadosHarcod = []
+        listaEmpleadosHarcod.push(new Empleado("pepe", "lopez", "150000", "180000.00", "112500.00", "112500.00", "15000.00", "c/Caja de Ahorro"))
+        listaEmpleadosHarcod.push(new Empleado("jose", "garcia", "150000", "180000.00", "112500.00", "112500.00", "15000.00", "c/Caja de Ahorro"))
+        listaEnvioMasivo.push(new EnvioMasivo("Empersa2", listaEmpleadosHarcod))
+        let str = JSON.stringify(listaEnvioMasivo)
+        localStorage.setItem("envioMasivo", str)
+    }
+}
+
+harcodEmpresas()
+
+function obtenerEmpresas() {
     const listaDeCargaMasiva = JSON.parse(localStorage.getItem("envioMasivo"))
-    // if (miCarrito = JSON.parse(localStorage.getItem("envioMasivo"))) {
-    //     document.querySelector("#productosComprados").innerHTML = `<strong>Mi Compra:</strong> ${miCarrito.join(", ")}`
-    //     if (localStorage.getItem("datosDeUsr")) {
-    //         const datosDeUsr = JSON.parse(localStorage.getItem("datosDeUsr"))
-    //               inputNombre.value = datosDeUsr.nombre
-    //               inputTelefono.value = datosDeUsr.telefono
-    //               inputEmail.value  = datosDeUsr.email
-    //     }    
-    // }
+    if (!!listaDeCargaMasiva) {
+        return listaDeCargaMasiva
+    }
+    return false
 }
 
 function obtenerCargaMasiva(nombreEmpresa) {
@@ -267,27 +291,26 @@ function eliminarCargaMasivaXNombreEmpresa(nombreEmpresa) {
 function cargaTablaEmpresas() {
     let listaEmpresas = obtenerCargasMasivaTodas()
     let mensaje = "";
-   console.log(listaEmpresas)
+    tablaDos.innerHTML = ""
+    console.log(listaEmpresas)
     for (let item of listaEmpresas) {
         let filaEmpresas = document.createElement("tr")
         let mensaje = detalleEmpresa(item.listaEmpleados)
-      let columna = document.createElement("td")  
-       let boton = document.createElement("button")
-       boton.innerText = `Detalle`
-       boton.className  = "detailButton"
-       boton.addEventListener("click", ()=>{
-        mostrarDetalle(mensaje)
-       })
-       columna.append(boton)
-       columna.className = "td"
+        let columna = document.createElement("td")
+        let boton = document.createElement("button")
+        boton.innerText = `Detalle`
+        boton.className = "detailButton"
+        boton.addEventListener("click", () => {
+            mostrarDetalle(mensaje)
+        })
+        columna.append(boton)
+        columna.className = "td"
         filaEmpresas.innerHTML = `
         <td class="td"> <p> ${item.nombreEmpresa}</p> </td> 
         <td class="td"> <p> ${item.listaEmpleados.length}</p> </td> 
          `
-         filaEmpresas.append(columna)
-
-       tablaDos.append(filaEmpresas)
-    
+        filaEmpresas.append(columna)
+        tablaDos.append(filaEmpresas)
     }
 }
 
@@ -300,10 +323,27 @@ function mostrarDetalle(item) {
 function detalleEmpresa(lista) {
     let mensaje = ""
     for (let item of lista) {
-        mensaje += " " + item.nombre
+        mensaje += visualizarDetalle(item)
     }
-return mensaje
+    return mensaje
 }
+
+
+function visualizarDetalle(item) {
+      if(!!item){
+        let mensaje = "";
+        mensaje += "Nombre: " + item.nombre + "\n"
+        mensaje += "Apellido: " + item.apellido + "\n"
+        mensaje += "Ingreso Neto: " + item.ingresoNeto + "\n"
+        mensaje += "Monto de Prestamo: " + item.montoPrestamo + "\n"
+        mensaje += "Monto de Tarjeta Visa: " + item.montoVisa + "\n"
+        mensaje += "Monto de Tarjeta Master: " + item.montoMaster + "\n"
+        mensaje += "Monto de Tarjeta Master: " + item.montoCuentaCorriente + "\n"
+        mensaje += "Monto de Tarjeta Master: " + item.cajaAhorro + "\n"
+        return mensaje
+    }
+}
+
 
 cargaTablaEmpresas()
 
