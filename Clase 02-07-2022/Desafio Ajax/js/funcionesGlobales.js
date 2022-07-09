@@ -9,6 +9,25 @@ const tablaDos = document.getElementById("tablaDos");
 harcodEmpresas()
 
 
+const lista = document.querySelector("#listado")
+
+console.log(fetch('https://jsonplaceholder.typicode.com/posts') 
+    .then ((resp)=>resp.json())
+    .then ((data)=>{
+        data.forEach((post) => {
+            const li = document.createElement('li')
+            li.innerHTML=`
+            <h4>${post.title}</h4>
+            <p>${post.body}</p>
+            `
+            lista.append(li)
+        });
+     
+    }) 
+)
+   
+
+
 
 // const eventoFuturo = (res) => {
 //     return new Promise((resolve, reject) => {
@@ -18,7 +37,7 @@ harcodEmpresas()
 
 //     })
 // }
-
+/*
 
 const DB = [
 {id:1 , nombre:'producto1', precio: 5000},
@@ -52,7 +71,7 @@ let productos = []
         renderProductos(productos)   
      })
 
-
+*/
 // eventoFuturo(true)
 //     .then((response) => {
 //         console.log(response)
